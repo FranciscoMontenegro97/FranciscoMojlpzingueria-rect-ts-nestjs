@@ -1,0 +1,28 @@
+// Abstracts (solo importamos aquí, no en los componentes individuales)
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins' as *;
+@use 'abstracts/functions' as *;
+
+// Base
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/utilities';
+
+// Layout
+@use 'layout/navbar';
+@use 'layout/hero';
+@use 'layout/footer';
+@use 'layout/grid';
+
+// Sections
+@use 'sections/services';
+@use 'sections/contact';
+@use 'sections/portfolio';
+@use 'sections/careers';
+
+// Components
+@use 'components/buttons';
+@use 'components/forms';
+@use 'components/whatsapp-button';
+@use 'components/scroll-top';
+@use 'components/loading';

@@ -1,0 +1,167 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.footer {
+  background-color: darken($background-dark, 3%);
+  padding: 4rem 0 0; // Quitamos el padding bottom
+  border-top: 1px solid rgba($background-dark, 0.1);
+  margin-top: auto;
+  width: 100vw; // Asegura que ocupe todo el ancho de la ventana
+  margin-left: calc(-50vw + 50%); // Técnica para extender más allá del contenedor
+  margin-right: calc(-50vw + 50%);
+  margin-bottom: 0; // Asegura que no haya margen inferior
+  margin-top: auto; // Empuja el footer al fondo
+  align-self: flex-end; // Asegura que el footer se quede abajo
+  position: relative; // Asegura que mantenga su posición
+  bottom: 0; // Lo ancla al fondo
+
+  &__content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      text-align: center;
+    }
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Centrar contenido de la columna
+    gap: 1.5rem;
+  }
+
+  &__logo {
+    max-width: 200px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  &__social {
+    display: flex;
+    gap: 1rem;
+    justify-content: center; // Centrar los iconos de redes sociales
+    width: 100%; // Asegurar que ocupe todo el ancho disponible
+
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
+  }
+
+  &__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba($primary-color, 0.1);
+    color: $secondary-color;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: $primary-color;
+      color: $secondary-color;
+      transform: translateY(-3px);
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      color: inherit;
+    }
+  }
+
+  &__title {
+    color: $primary-color;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  &__hours {
+    list-style: none;
+    padding: 0;
+    color: $secondary-color;
+    opacity: 0.8;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &__nav {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    button {
+      background: none;
+      border: none;
+      color: $secondary-color;
+      opacity: 0.8;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+
+      &:hover {
+        color: $primary-color;
+        opacity: 1;
+        transform: translateX(5px);
+      }
+    }
+  }
+
+  &__bottom {
+    max-width: 800px; // Reducido de 1200px
+    margin: 3rem auto 0; // Reducido de 4rem
+    padding: 1.5rem 2rem 1.5rem; // Ajustamos el padding
+    border-top: 1px solid rgba($secondary-color, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $secondary-color;
+    opacity: 0.8;
+    font-size: 0.9rem;
+    gap: 2rem; // Añadido gap para controlar el espacio entre elementos
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+      max-width: calc(100% - 4rem); // Ajusta el ancho en móvil
+    }
+  }
+
+  &__credit {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: $secondary-color;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: $primary-color;
+
+      svg {
+        transform: rotate(-45deg);
+      }
+    }
+
+    svg {
+      transition: transform 0.3s ease;
+    }
+  }
+
+}

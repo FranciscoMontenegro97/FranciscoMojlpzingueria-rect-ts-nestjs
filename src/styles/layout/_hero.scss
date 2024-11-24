@@ -1,0 +1,154 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.hero {
+  position: absolute;
+  top: 70px; // Exactamente donde termina el navbar, sin espacios adicionales
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 85vh;
+  margin: 0; // Aseguramos que no haya márgenes
+  padding: 0; // Aseguramos que no haya padding
+  overflow: hidden;
+
+
+  &__image {
+    position: absolute; // Aseguramos que la imagen cubra todo el espacio
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left;
+    will-change: transform; // Optimiza las transformaciones
+    backface-visibility: hidden; // Mejora el rendimiento
+    transform: translateZ(0); // Fuerza la aceleración por hardware
+    -webkit-font-smoothing: antialiased; // Mejora el renderizado de texto
+    margin: 0; // Eliminamos cualquier margen de la imagen
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to left,
+        rgba($text-color, 0.8) 0%,
+        rgba($text-color, 0.4) 50%,
+        rgba(black, 0.6) 100%);
+  }
+
+  &__content {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    max-width: 600px;
+    padding: 2rem;
+    background: rgba(black, 0.5);
+    backdrop-filter: blur(8px);
+    border-left: 4px solid $primary-color;
+    border-radius: 0 8px 8px 0;
+  }
+
+  &__title {
+    color: $secondary-color;
+    font-family: $font-primary;
+    font-size: 3rem;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  &__description {
+    color: rgba($secondary-color, 0.9);
+    font-family: $font-primary;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 1024px) {
+    height: 80vh;
+
+    &__content {
+      max-width: 550px;
+      padding: 1.75rem;
+    }
+
+    &__title {
+      font-size: 2.75rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    height: 75vh;
+    padding-top: 2rem; // Añadimos espacio en la parte superior para mobile
+
+    &__overlay {
+      // Ajustamos el overlay para mejor legibilidad en móvil
+      background: linear-gradient(to bottom,
+          rgba($text-color, 0.7) 0%,
+          rgba($text-color, 0.8) 100%);
+    }
+
+    &__content {
+      // Centramos el contenido
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      bottom: auto;
+      width: 90%; // Ancho relativo al contenedor
+      max-width: 450px;
+      text-align: center;
+      border-left: none;
+      border-top: 4px solid $primary-color;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-top: 2rem; // Espacio adicional para la descripción
+    }
+
+    &__title {
+      font-size: 2.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    &__description {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-top: 1rem; // Espaciado entre título y descripción
+    }
+  }
+
+  @media (max-width: 576px) {
+    height: 70vh;
+    padding-top: 3rem; // Un poco más de espacio en pantallas muy pequeñas
+
+    &__content {
+      width: 85%;
+      padding: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    &__title {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    &__description {
+      margin-top: 10vh;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+  }
+
+}
+
+// Si es necesario, podemos agregar un contenedor para mantener todo alineado
+// .container {
+//   max-width: 1200px;
+//   margin: 0 auto;
+//   position: relative;
+//   overflow-x: hidden; // Para evitar scroll horizontal
+// }

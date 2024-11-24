@@ -1,0 +1,158 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $navbar-height;
+  z-index: $z-navbar;
+  background-color: $primary-color;
+  transition: $transition-base;
+
+  &.scrolled {
+    box-shadow: 0 4px 12px rgba($black, 0.15);
+  }
+
+  &__container {
+    @include container;
+    @include flex(row, space-between, center);
+    height: 100%;
+  }
+
+  &__logo {
+    img {
+      height: calc($navbar-height - 10px);
+      width: 200px;
+    }
+  }
+
+  &__menu {
+    display: none;
+
+    @include respond-to(md) {
+      @include flex(row, flex-end, center);
+      gap: 2rem;
+    }
+
+    &-item {
+      background: none;
+      border: none;
+      color: $secondary-color;
+      font-family: $font-primary;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      padding: 0.5rem 1rem;
+      position: relative;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: $secondary-color;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      &:hover {
+        color: rgba($secondary-color, 0.9);
+        transform: translateY(-2px);
+
+        &::before {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
+      }
+
+      &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba($primary-color, 0.5);
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+  }
+
+  &__mobile-button {
+    @include flex(row, center, center);
+    background: none;
+    border: none;
+    color: $secondary-color; // Cambiado a blanco para contrastar con el fondo rojo
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: $transition-base;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    @include respond-to(md) {
+      display: none;
+    }
+  }
+
+  &__mobile-menu {
+    position: absolute;
+    top: $navbar-height;
+    left: 0;
+    right: 0;
+    background-color: $primary-color;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba($black, 0.2);
+    animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    @include respond-to(md) {
+      display: none;
+    }
+
+    &-item {
+      width: 100%;
+      background: none;
+      border: none;
+      color: $secondary-color;
+      font-family: $font-primary;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      padding: 1rem;
+      text-align: left;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: rgba($primary-color, 0.95); // Aún más oscuro para el hover
+        padding-left: 1.5rem; // Se mueve ligeramente a la derecha
+        color: rgba($secondary-color, 0.9);
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid rgba($secondary-color, 0.1); // Separador sutil
+      }
+    }
+  }
+
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

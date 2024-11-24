@@ -1,0 +1,210 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.portfolio {
+  //padding: 10vh 0;
+  margin-top: 10vh;
+
+  &__container {
+    max-width: 1200px; // Mismo ancho que el navbar
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 2.8rem;
+    color: $secondary-color;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  &__subtitle {
+    text-align: center;
+    color: rgba($secondary-color, 0.8);
+    font-size: 1.2rem;
+    margin-bottom: 4rem;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+
+    // Centramos la última imagen cuando hay un número impar
+    &::after {
+      content: '';
+      grid-column: 1 / span 1; // Ocupa la primera columna
+    }
+
+    // La última imagen se centra
+    & > *:last-child:nth-child(3n + 1) {
+      grid-column: 2; // La centramos en la columna del medio
+    }
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+
+      &::after {
+        display: none;
+      }
+
+      & > *:last-child:nth-child(2n + 1) {
+        grid-column: 1 / span 2;
+        width: 50%;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 600px; // Limitamos el ancho para centrar mejor
+      margin: 0 auto;
+      gap: 1.5rem;
+
+      // Reset del centrado de la última imagen en vista desktop
+      & > *:last-child:nth-child(3n + 1) {
+        grid-column: auto;
+      }
+
+      // Centrado de última imagen cuando es impar en mobile
+      & > *:last-child:nth-child(2n + 1) {
+        grid-column: 1 / -1;
+        width: calc(50% - 0.75rem); // Mitad del ancho menos la mitad del gap
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      max-width: 400px; // Ajustamos el ancho máximo para pantallas más pequeñas
+      gap: 1rem;
+    }
+  }
+
+  &__item {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+      .portfolio__overlay {
+        left: 0;
+        opacity: 0.8; // Opacidad ajustable
+      }
+
+      .portfolio__item-title {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 700px) {
+      height: 250px; // Reducimos un poco la altura en mobile
+
+      &:hover {
+        .portfolio__overlay {
+          transform: translateY(0);
+          opacity: 1;
+        }
+
+        .portfolio__item-title {
+          transform: translateY(0);
+        }
+      }
+    }
+
+    @media (max-width: 480px) {
+      height: 200px; // Aún más pequeño para móviles muy pequeños
+    }
+  }
+
+  &__title {
+    @media (max-width: 700px) {
+      font-size: 2.2rem; // Ajustamos tamaño del título principal
+    }
+  }
+
+  &__subtitle {
+    @media (max-width: 700px) {
+      font-size: 1rem;
+      padding: 0 1rem;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: $primary-color;
+    clip-path: polygon(0 0, 100% 0, 25% 100%, 0 100%); // Ajustado para que llegue hasta la mitad
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+    display: flex;
+    align-items: center; // Centrado vertical
+    padding-left: 2rem; // Padding izquierdo para el título
+
+    @media (max-width: 700px) {
+      left: 0;
+      padding: 0; // Quitamos el padding
+      clip-path: none;
+      background: linear-gradient(to top,
+          rgba($primary-color, 0.9) 0%,
+          rgba($primary-color, 0.7) 50%,
+          rgba($primary-color, 0.4) 100%);
+      opacity: 0;
+
+      // Centrado perfecto
+      display: flex;
+      justify-content: center; // Centro horizontal
+      align-items: center; // Centro vertical
+    }
+  }
+
+  &__item-title {
+    color: $secondary-color;
+    font-size: 1.5rem;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.4s ease-in-out 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 2;
+    max-width: 80%; // Para asegurar que el texto no se salga del área visible
+
+    @media (max-width: 700px) {
+      margin: 0;
+      padding: 0;
+      font-size: 1rem;
+      text-align: center;
+      opacity: 1;
+      max-width: 100%;
+      width: 100%; // Aseguramos que ocupe todo el ancho
+      transform: none; // Quitamos la transformación por defecto
+
+      // Centrado absoluto
+      position: absolute;
+      transform: translate(-50%, -50%);
+
+      // Estilos del texto
+      line-height: 1.4;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 480px) {
+      font-size: 0.8rem;
+    }
+  }
+}

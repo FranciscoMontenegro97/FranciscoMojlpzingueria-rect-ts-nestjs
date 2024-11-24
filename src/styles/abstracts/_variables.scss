@@ -1,0 +1,36 @@
+// Colors
+$primary-color: #D43A3A; // Color rojo del logo
+$secondary-color: #ffffff; // Color blanco
+$text-color: #333333; // Color texto principal
+$background-color: #f5f5f5; // Color de fondo
+$black: black;
+$background-dark: #1a1a1a; // Fondo oscuro
+$text-light: #e0e0e0; // Texto claro
+$accent-color: #ff4d4d; // Rojo más brillante para acentos
+$border-color: rgba(255, 255, 255, 0.1);
+
+// Typography
+$font-primary: 'Inter', sans-serif;
+$font-size-base: 16px;
+$font-weight-normal: 400;
+$font-weight-bold: 600;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Layout
+$navbar-height: 130px;
+$container-padding: 1rem;
+$max-width: 1200px;
+
+// Transitions
+$transition-base: all 0.3s ease;
+
+// Z-index
+$z-navbar: 1000;
+
+// Gradients
+$gradient-primary: linear-gradient(135deg, $primary-color, darken($primary-color, 15%));

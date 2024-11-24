@@ -1,0 +1,98 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+
+.whatsapp-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center; // Añadido para mejor centrado
+  background-color: #25D366;
+  border: none;
+  border-radius: 50px;
+  padding: 1rem;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  width: 64px; // Ancho fijo para el círculo
+  height: 64px; // Altura fija para el círculo
+
+  // Efecto hover solo en desktop
+  @media (min-width: 769px) {
+    &:hover {
+      width: auto; // Permitir expansión en hover
+      padding-right: 2rem;
+      padding-left: 2rem;
+      border-radius: 50px;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+
+      .whatsapp-button__text {
+        max-width: 200px;
+        opacity: 1;
+      }
+    }
+  }
+
+  &__icon {
+    font-size: 2rem;
+    color: white;
+    min-width: 2rem;
+    height: 2rem;
+    display: flex; // Añadido para mejor centrado
+    align-items: center; // Añadido para mejor centrado
+    justify-content: center; // Añadido para mejor centrado
+    margin: 0; // Reset de márgenes
+    padding: 0; // Reset de padding
+  }
+
+  &__text {
+    color: white;
+    font-weight: 500;
+    white-space: nowrap;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    // En mobile siempre oculto
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  // Efecto de pulso
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #25D366;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    animation: pulse 2s infinite;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  70% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}

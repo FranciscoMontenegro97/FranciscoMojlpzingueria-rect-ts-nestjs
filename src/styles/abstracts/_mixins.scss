@@ -1,0 +1,58 @@
+@use '../abstracts/variables' as *;
+
+// Media Queries
+@mixin respond-to($breakpoint) {
+  @if $breakpoint ==sm {
+    @media (min-width: $breakpoint-sm) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==md {
+    @media (min-width: $breakpoint-md) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==lg {
+    @media (min-width: $breakpoint-lg) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==xl {
+    @media (min-width: $breakpoint-xl) {
+      @content;
+    }
+  }
+}
+
+// Flexbox
+@mixin flex($direction: row, $justify: flex-start, $align: stretch) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// Container
+@mixin container {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+}
+
+// Transitions
+@mixin transition($property: all) {
+  transition: $property $transition-base;
+}
+
+// Interactive element
+@mixin interactive {
+  cursor: pointer;
+  @include transition;
+
+  &:hover {
+    color: $primary-color;
+  }
+}

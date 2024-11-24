@@ -1,0 +1,333 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.contact {
+  //background-color: $background-dark;
+  //margin-top: 10vh; // Agregamos el margin-top que mencionaste
+  width: 100%; // Aseguramos ancho completo
+  padding: 10vh 0;
+
+  &__container {
+    max-width: 1200px; // Mismo ancho que services
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    min-height: 800px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__title {
+    font-size: 2.8rem;
+    color: $primary-color;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  &__subtitle {
+    color: rgba($secondary-color, 0.8);
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+
+  &__info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    gap: 2rem;
+    margin-bottom: 3rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr; // Cambia a una sola columna
+      grid-template-rows: repeat(3, auto); // Tres filas automáticas
+      gap: 1.5rem;
+    }
+
+  }
+
+  &__info-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2.5rem;
+    font-size: 1.1rem;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    height: auto;
+
+    &:hover {
+      transform: translateY(-5px);
+      background: rgba($primary-color, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      padding: 2rem;
+      min-height: auto; // Elimina altura mínima en móvil
+
+      &:hover {
+        transform: translateY(-3px); // Reducimos el efecto hover en móvil
+      }
+    }
+
+    @media (max-width: 375px) {
+      padding: 1rem;
+      min-height: auto; // Elimina altura mínima en móvil
+      font-size: 0.8rem;
+
+      &:hover {
+        transform: translateY(-3px); // Reducimos el efecto hover en móvil
+      }
+    }
+
+    // Card especial para el mapa
+    &--map {
+      grid-column: 1 / -1; // Ocupa ambas columnas
+      min-height: 300px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      cursor: pointer;
+
+      &:hover .contact__map {
+        opacity: 0.8;
+      }
+
+      @media (max-width: 768px) {
+        grid-column: auto; // Reset del span en móvil
+        padding: 2rem; // Mismo padding que las otras cards
+        min-height: auto;
+
+        .contact__map-wrapper {
+          display: none; // Ocultamos el mapa en móvil
+        }
+
+        .contact__info-header {
+          margin-bottom: 0; // Quitamos el margen ya que no hay mapa
+        }
+      }
+    }
+  }
+
+  &__info-header {
+    text-align: center;
+    margin-bottom: 1rem;
+
+    h3 {
+      color: $secondary-color;
+      margin: 0.8rem 0;
+      font-size: 1.4rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: rgba($secondary-color, 0.8);
+    }
+
+    @media (max-width: 768px) {
+      h3 {
+        margin: 0.5rem 0;
+      }
+    }
+  }
+
+  &__info-icon {
+    color: $primary-color;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 2rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  &__map-wrapper {
+    flex: 1;
+    min-height: 250px;
+    border-radius: 8px;
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__map {
+    width: 100%;
+    height: 100%;
+    border: none;
+    transition: opacity 0.3s ease;
+  }
+
+  // Nueva sección de formulario
+  &__form-section {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba($secondary-color, 0.1);
+  }
+
+  &__form-title {
+    font-size: 2rem;
+    color: $secondary-color;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  &__form {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  &__input-icon {
+    position: absolute;
+    left: 1rem;
+    color: rgba($secondary-color, 0.5);
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: $secondary-color;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+
+    &::placeholder {
+      color: rgba($secondary-color, 0.5);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      background: rgba($primary-color, 0.1);
+    }
+
+    &.error {
+      border-color: #ff4444;
+    }
+  }
+
+  textarea {
+    height: 120px;
+    resize: none;
+  }
+
+  &__error {
+    color: #ff4444;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+
+  &__submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: $primary-color;
+    color: $secondary-color;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+
+    &:hover {
+      background: darken($primary-color, 10%);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &.submitting {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+
+  &__submit-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  &__status {
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    animation: slideIn 0.3s ease;
+
+    &--success {
+      background: rgba(#00ff00, 0.1);
+      color: #00ff00;
+      border: 1px solid rgba(#00ff00, 0.3);
+    }
+
+    &--error {
+      background: rgba(#ff4444, 0.1);
+      color: #ff4444;
+      border: 1px solid rgba(#ff4444, 0.3);
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,310 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.careers {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  //padding: 4rem 0;
+  overflow: hidden;
+  padding: 10vh 0;
+  margin-bottom: 10vh;
+
+  // &__content {
+  //   width: 100%;
+  //   max-width: 1200px;
+  //   margin: 0 auto;
+  //   position: relative;
+  //   z-index: 2;
+  //   display: flex;
+  //   flex-direction: column;
+  //   gap: 3rem;
+  // }
+  &__content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 0 2rem; // Añadimos padding horizontal
+
+    @media (max-width: 768px) {
+      padding: 0 1rem;
+    }
+  }
+
+  &__text {
+    text-align: center;
+    color: $secondary-color;
+  }
+
+  &__title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+    @media (max-width: 768px) {
+
+      padding: 5vh;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  // &__form-container {
+  //   width: 50%;
+  //   background: rgba(255, 255, 255, 0.1);
+  //   backdrop-filter: blur(10px);
+  //   padding: 2rem;
+  //   border-radius: 15px;
+  //   animation: slideIn 0.5s ease-out;
+
+  //   @media (max-width: 768px) {
+  //     width: 90%;
+  //     margin: 0 auto;
+  //   }
+  // }
+  &__form-container {
+    width: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 15px;
+    animation: slideIn 0.5s ease-out;
+
+    @media (max-width: 768px) {
+      width: auto; // Ocupa todo el ancho en mobile
+      margin: 0;
+      padding: 1.5rem;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%; // Aseguramos ancho completo
+  }
+
+  &__form-group {
+    position: relative;
+    width: 100%; // Ancho completo para el contenedor de inputs
+    display: flex; // Añadimos flex para mejor control
+    justify-content: center; // Centramos el contenido
+  }
+
+  &__input-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  &__input-icon {
+    position: absolute;
+    left: 1rem;
+    color: rgba($secondary-color, 0.5);
+    width: 1.2rem;
+    height: 1.2rem;
+
+  }
+
+  input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem; // Mismo padding que el formulario de contacto
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: $secondary-color;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: rgba($secondary-color, 0.6);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      background: rgba($primary-color, 0.1);
+
+      & + .careers__input-icon {
+        color: $primary-color; // El icono cambia de color cuando el input está en focus
+      }
+    }
+
+    &.error {
+      border-color: #ff4444;
+    }
+  }
+
+  &__file-upload {
+    position: relative;
+  }
+
+  &__file-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: $secondary-color;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: $primary-color;
+    }
+  }
+
+  &__file-input {
+    display: none;
+  }
+
+  &__file-icon {
+    width: 24px;
+    height: 24px;
+    color: $secondary-color;
+    flex-shrink: 0; // Evita que el icono se encoja
+  }
+
+  &__error {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    color: #ff4444;
+    font-size: 0.875rem;
+  }
+
+  &__submit {
+    width: 100%; // Ancho completo
+    background: $primary-color;
+    color: $secondary-color;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-sizing: border-box; // Asegura que el padding no afecte el ancho
+
+    &:hover {
+      background: darken($primary-color, 10%);
+      transform: translateY(-2px);
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+
+  &__loader {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: $secondary-color;
+    animation: spin 1s infinite linear;
+  }
+
+  &__status {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: fadeIn 0.3s ease-out;
+
+    &--success {
+      background: rgba(#00ff00, 0.1);
+      color: #00ff00;
+    }
+
+    &--error {
+      background: rgba(#ff4444, 0.1);
+      color: #ff4444;
+    }
+  }
+
+  &__background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-image: url('/images/careers-image.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.8;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: auto;
+    padding: 5vh 0;
+    margin-bottom: 5vh;
+    height: auto;
+    min-height: auto;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
